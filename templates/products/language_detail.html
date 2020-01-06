@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ author }}
+{% endblock %}
+
+{% block content %}
+    <div class="main">
+        {% include 'products/products_list.html' %}
+    </div>
+{% endblock %}
