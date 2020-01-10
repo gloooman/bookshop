@@ -56,7 +56,7 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
-ROOT_URLCONF = 'BookShop.urls'
+ROOT_URLCONF = 'bookshop.urls'
 
 TEMPLATES = [
     {
@@ -76,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'BookShop.wsgi.application'
+WSGI_APPLICATION = 'bookshop.wsgi.application'
 
 
 # Database
