@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ author }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="main">
+        <h1>{{ author.first_name }} {{ author.last_name }}</h1>
+        <div class="media position-relative mt-3">
+            <img src="/{{ author.foto.url }}" class="mr-3 img-fluid img-margin" alt="..." style="max-width: 250px;">
+            <div class="media-body">
+                <p>{{ author.author_review }}</p>
+            </div>
+        </div>
+        <h2>Книги автора:</h2>
+            <p></p>
+        {% include 'products/products_list.html' %}
+    </div>
+{% endblock %}
