@@ -1,6 +1,5 @@
-from .mixins import *
-from .models import *
-from django.shortcuts import render
+from products.mixins import ObjDetailMixin
+from products.models import Product, Genre, Language, Author, CountryOfOrigin
 from django.views.generic import View
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
@@ -50,4 +49,3 @@ class LanguageDetail(ObjDetailMixin, View):
 class CountryDetail(ObjDetailMixin, View):
     model = CountryOfOrigin
     template_name = 'products/country_detail.html'
-

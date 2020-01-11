@@ -1,9 +1,6 @@
 from django.db import models
 from django.shortcuts import reverse
 from exclusivebooleanfield import ExclusiveBooleanField
-from django.utils.text import slugify
-from time import time
-
 
 # def gen_slug(s):
 #     new_slug = slugify(s, allow_unicode=True)
@@ -109,9 +106,12 @@ class CountryOfOrigin(models.Model):
 
 class Product(models.Model):
     name = models.CharField('Название книги', max_length=200)
-    author = models.ForeignKey(Author, verbose_name="Автор", on_delete=models.DO_NOTHING)
-    language = models.ForeignKey(Language, verbose_name='Язык', on_delete=models.DO_NOTHING)
-    country = models.ForeignKey(CountryOfOrigin, verbose_name='Cтрана написания', on_delete=models.DO_NOTHING, blank=True)
+    author = models.ForeignKey(Author, verbose_name="Автор",
+                               on_delete=models.DO_NOTHING)
+    language = models.ForeignKey(Language, verbose_name='Язык',
+                                 on_delete=models.DO_NOTHING)
+    country = models.ForeignKey(CountryOfOrigin, verbose_name='Cтрана написания',
+                                on_delete=models.DO_NOTHING, blank=True)
     price = models.DecimalField('Цена', default=0, decimal_places=2, max_digits=15)
     genre = models.ManyToManyField(Genre)
     review = models.TextField('Рецензия', blank=True, null=True)
@@ -143,8 +143,10 @@ class Product(models.Model):
 
 
 class ProductImage(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True, default=None)
-    image = models.ImageField(upload_to='static/media/products_images/', blank=False)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,
+                                blank=True, null=True, default=None)
+    image = models.ImageField(upload_to='static/media/products_images/',
+                              blank=False)
     is_active = models.BooleanField(default=True)
     is_main = ExclusiveBooleanField(default=False, on=('product',))
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
