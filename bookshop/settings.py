@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'orders',
     'products',
-    'ajaxtest',
-
     # 'user'
 ]
 
