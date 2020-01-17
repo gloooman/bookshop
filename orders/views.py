@@ -27,11 +27,12 @@ def cart_add(request, product_id):
 
 def cart_remove(request, product_id):
     cart = Cart(request)
-    print(dir(cart.session))
     product = get_object_or_404(Product, id=product_id)
     cart.remove(product)
+    print(cart.get_total_price())
     return JsonResponse({
-        'product_id': product.id
+        'product_id': product.id,
+        'total_price': cart.get_total_price()
     })
 
 

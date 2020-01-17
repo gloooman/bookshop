@@ -40,7 +40,6 @@ for (const cartAdd of cartAdds) {
                     li_new.querySelector('.close').addEventListener('click', function (e) {
                         e.preventDefault();
                         let url = '/order/remove/'+id+'/';
-                        console.log(url);
                         fetch(url)
                             .then(response => response.json())
                             .then(function (json) {
@@ -68,11 +67,15 @@ for (const cartRemove of cartRemoves){
         e.preventDefault();
 
         let url = cartRemove.getAttribute('href');
-        console.log(url+' is end');
         fetch(url)
             .then(response => response.json())
             .then(function (json) {
-                document.getElementById('cart-id-'+json.product_id).remove()
+                document.getElementById('cart-id-'+json.product_id).remove();
+                if (true){
+                    console.log('aaaa')
+                    document.getElementById('tr-id-'+json.product_id).remove();
+                    document.getElementById('total-price').textContent = json.total_price
+                }
                 document.getElementById('cart-length').textContent =
                     parseInt(document.getElementById('cart-length').textContent) - 1
             })

@@ -18,12 +18,11 @@
         <tbody>
         {% for item in cart %}
             {% with product=item.product %}
-            <tr>
+            <tr id="tr-id-{{ product.id }}">
                 <td><a href="{{ product.get_absolute_url }}">
                     <img src="/{{ product.get_main_image_url }}" style="max-height: 70px">
                 </a></td>
                 <td>{{ product.name }}</td>
-                <
                 <form action="{% url "cart:cart_add" product.id %}" method="post"
                       class="form-buy"
                       data-id="{{ product.id }}"
@@ -33,24 +32,25 @@
                       data-price="{{ product.price }}">
                 <td style="max-width: 50px">
                         <input type="number" value="{{ item.quantity }}" class="form-control-sm"
-                               min="0" max="20" step="1" name="quantity" id="id_quantity">
+                               min="0" max="20" step="1" name="quantity">
                         {{ item.update_quantity_form.update }}
                         {% csrf_token %}
                 </td>
                 <td>
                     <input type="submit" value="Обновить" class="btn-sm btn-dark">
-                    <a href="{% url "cart:cart_remove" product.id %}" class="close btn-sm btn-danger ">X</a>
+                    <a href="{% url "cart:cart_remove" product.id %}" class="close btn-sm btn-danger">X</a>
                 </td>
                 </form>
                 <td class="num">{{ item.price }} грн.</td>
                 <td class="num">{{ item.total_price }} грн.</td>
             </tr>
+
             {% endwith %}
         {% endfor %}
         <tr class="total">
             <td>Total</td>
             <td colspan="4"></td>
-            <td class="num">{{ cart.get_total_price }} грн.</td>
+            <td class="num" id="total-price">{{ cart.get_total_price }} грн.</td>
         </tr>
         </tbody>
     </table>
