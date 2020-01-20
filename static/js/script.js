@@ -20,7 +20,14 @@ for (const cartAdd of cartAdds) {
                 if (document.getElementById('cart-id-' + id)) {
                     let li = document.getElementById('cart-id-' + id);
                     let quantityElement = li.querySelector('.quantity');
-                    let quantityNew = parseInt(quantityElement.textContent) + parseInt(quantity);
+                    let quantityNew
+                    if (json.update){
+                        console.log(json.update)
+                        quantityNew = parseInt(quantity);
+
+                    }else {
+                        quantityNew = parseInt(quantityElement.textContent) + parseInt(quantity);
+                    }
                     quantityElement.textContent = quantityNew
                 } else {
                     let li_new = document.createElement('li');
@@ -52,6 +59,12 @@ for (const cartAdd of cartAdds) {
                             });
                     })
                 }
+                if (document.getElementById('tr-id-'+id)){
+                    console.log(parseInt(json.price)*parseInt(json.quantity))
+                    document.getElementById("td-price-"+id).textContent
+                        = parseInt(json.price)*parseInt(json.quantity) + ' грн.'
+                    document.getElementById('total-price').textContent = json.total_price + " грн."
+                }
             })
             .catch(function (error) {
                 console.log(error);
@@ -60,19 +73,41 @@ for (const cartAdd of cartAdds) {
 }
 
 
+// let cartUpdates = document.querySelectorAll('.update');
+//
+// for (const cartUpdate of cartUpdates){
+//     cartUpdate.addEventListener('click', function (e) {
+//         e.preventDefault();
+//
+//         let url = cartUpdate.getAttribute('action');
+//         fetch(url)
+//             .then(response => response.json())
+//             .then(function (json) {
+//                 console.log('aaaa')
+//                 // document.getElementById('tr-id-'+json.product_id).remove();
+//                 // document.getElementById('total-price').textContent = json.total_price
+//                 // document.getElementById('cart-length').textContent =
+//                 //     parseInt(document.getElementById('cart-length').textContent) - 1
+//             })
+//             .catch(function (error) {
+//                 console.log(error);
+//             });
+//     })
+// }
+
 let cartRemoves = document.querySelectorAll('.close');
 
 for (const cartRemove of cartRemoves){
     cartRemove.addEventListener('click', function (e) {
         e.preventDefault();
-
         let url = cartRemove.getAttribute('href');
         fetch(url)
             .then(response => response.json())
             .then(function (json) {
+                console.log(json)
                 document.getElementById('cart-id-'+json.product_id).remove();
+
                 if (true){
-                    console.log('aaaa')
                     document.getElementById('tr-id-'+json.product_id).remove();
                     document.getElementById('total-price').textContent = json.total_price
                 }

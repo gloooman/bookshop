@@ -21,15 +21,19 @@ def cart_add(request, product_id):
             quantity=cd['quantity'],
             update_quantity=cd['update']
         )
-
-    return JsonResponse(request.POST)
+    data = {
+        'price': product.price,
+        'total_price': cart.get_total_price()
+    }
+    data.update(request.POST)
+    return JsonResponse(data)
 
 
 def cart_remove(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
     cart.remove(product)
-    print(cart.get_total_price())
+    # print(cart.get_total_price())
     return JsonResponse({
         'product_id': product.id,
         'total_price': cart.get_total_price()

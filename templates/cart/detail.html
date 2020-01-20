@@ -41,8 +41,8 @@
                     <a href="{% url "cart:cart_remove" product.id %}" class="close btn-sm btn-danger">X</a>
                 </td>
                 </form>
-                <td class="num">{{ item.price }} грн.</td>
-                <td class="num">{{ item.total_price }} грн.</td>
+                <td class="num"> {{ item.price }} грн.</td>
+                <td class="num" id="td-price-{{ product.id }}">{{ item.total_price }} грн.</td>
             </tr>
 
             {% endwith %}
