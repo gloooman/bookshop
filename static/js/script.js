@@ -72,29 +72,6 @@ for (const cartAdd of cartAdds) {
     });
 }
 
-
-// let cartUpdates = document.querySelectorAll('.update');
-//
-// for (const cartUpdate of cartUpdates){
-//     cartUpdate.addEventListener('click', function (e) {
-//         e.preventDefault();
-//
-//         let url = cartUpdate.getAttribute('action');
-//         fetch(url)
-//             .then(response => response.json())
-//             .then(function (json) {
-//                 console.log('aaaa')
-//                 // document.getElementById('tr-id-'+json.product_id).remove();
-//                 // document.getElementById('total-price').textContent = json.total_price
-//                 // document.getElementById('cart-length').textContent =
-//                 //     parseInt(document.getElementById('cart-length').textContent) - 1
-//             })
-//             .catch(function (error) {
-//                 console.log(error);
-//             });
-//     })
-// }
-
 let cartRemoves = document.querySelectorAll('.close');
 
 for (const cartRemove of cartRemoves){
@@ -109,7 +86,7 @@ for (const cartRemove of cartRemoves){
 
                 if (true){
                     document.getElementById('tr-id-'+json.product_id).remove();
-                    document.getElementById('total-price').textContent = json.total_price
+                    document.getElementById('total-price').textContent = json.total_price + " грн."
                 }
                 document.getElementById('cart-length').textContent =
                     parseInt(document.getElementById('cart-length').textContent) - 1

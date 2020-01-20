@@ -1,10 +1,12 @@
 from products.mixins import ObjDetailMixin
 from products.models import Product, Genre, Language, Author, CountryOfOrigin
+from django.shortcuts import render
 from django.views.generic import View
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import FormMixin
 from orders.forms import CartAddProductForm
+from django.db.models import Q
 
 
 class ProductList(FormMixin, ListView):
@@ -21,8 +23,8 @@ class ProductDetail(DetailView):
     template_name = 'products/product_detail.html'
     context_object_name = 'product'
     pk_url_kwarg = 'id'
-    queryset = Product.objects\
-        .select_related('author', 'country', 'language')\
+    queryset = Product.objects \
+        .select_related('author', 'country', 'language') \
         .prefetch_related('genre', 'productimage_set')
 
     def get_context_data(self, **kwargs):
@@ -49,3 +51,13 @@ class LanguageDetail(ObjDetailMixin, View):
 class CountryDetail(ObjDetailMixin, View):
     model = CountryOfOrigin
     template_name = 'products/country_detail.html'
+
+
+class Search(View):
+    def get(self, request):
+        search_query = request.GET.get('search', '')
+        products = Product.objects.filter(Q(name__icontains=search_query) | Q(au))
+        return render(request, 'products/search_list.html', context={
+            'search_query': search_query,
+            'products': products
+        })

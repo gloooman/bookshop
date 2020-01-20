@@ -39,7 +39,7 @@ class Cart:
         for product in products:
             cart[str(product.id)]['product'] = product
         for item in cart.values():
-            item['price'] = float(item['price'])
+            item['price'] = Decimal(item['price'])
             item['total_price'] = item['price'] * item['quantity']
             yield item
 
@@ -49,7 +49,7 @@ class Cart:
 
     def get_total_price(self):
         return sum(
-            (float(item['price'])*float(item['quantity']))
+            (Decimal(item['price'])*Decimal(item['quantity']))
             for item in self.cart.values()
         )
 
