@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="main">
-    <h4>Книги по поиску <b> </b>:</h4>
-                {% include 'products/products_list.html' %}
+    <h4>Книги по поиску <b>{{ search_query }}</b>:</h4>
+    {% include 'products/products_list.html' %}
     </div>
 {% endblock %}

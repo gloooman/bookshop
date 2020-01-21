@@ -54,9 +54,14 @@ class CountryDetail(ObjDetailMixin, View):
 
 
 class Search(View):
+
     def get(self, request):
         search_query = request.GET.get('search', '')
-        products = Product.objects.filter(Q(name__icontains=search_query) | Q(au))
+        products = Product.objects.filter(Q(name__icontains=search_query) |
+                                          Q(author__first_name__icontains=search_query) |
+                                          Q(author__last_name__icontains=search_query) |
+                                          Q(genre__genre_name__icontains=search_query))
+        print(products)
         return render(request, 'products/search_list.html', context={
             'search_query': search_query,
             'products': products
