@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '!^=51_nh0n%#%nm))a73--4c74tqx!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
-ALLOWED_HOSTS = ['protected-basin-82325.herokuapp.com']
+ALLOWED_HOSTS = ['protected-basin-82325.herokuapp.com', '*']
 
 
 # Application definition
@@ -86,11 +86,11 @@ WSGI_APPLICATION = 'bookshop.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "bookshop",
-        "USER": "bookshop",
-        "PASSWORD": "bookshop",
-        "HOST": "",
-        "PORT": "",
+        "NAME": "dc1vnlrvbhj8up",
+        "USER": "aqpdhhjehemwkp",
+        "PASSWORD": "4f3be9c132f3447ae69227e7261a12db364dc5002664472f00bf79a6ffecc0c2",
+        "HOST": "ec2-3-215-41-107.compute-1.amazonaws.com",
+        "PORT": "5432",
     }
 }
 
@@ -145,6 +145,6 @@ STATICFILES_DIRS = (
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
 
